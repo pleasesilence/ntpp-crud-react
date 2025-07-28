@@ -1,0 +1,51 @@
+:root {
+    --dark-color: #1A1A1A;
+    --light-color: #FFFFFF;
+    --grey-color: #B2B1B1;
+    --yellow-color: #F5CC00;
+}
+
+* {
+    font-family: "Montserrat", sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+@font-face {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    src: url('./assets/fonts/Montserrat-Medium.ttf');
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+    src: url('./assets/fonts/Montserrat-SemiBold.ttf');
+    font-style: normal;
+}
+@font-face {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
+    src: url('./assets/fonts/Montserrat-Bold.ttf');
+    font-style: normal;
+}
+
+.App {
+    padding: 70px;
+}
+
+.title {
+    font-weight: 600;
+    font-size: 48px;
+    line-height: 59px;
+    margin-bottom: 40px;
+}
+
+.note-card-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    flex-direction: row;
+}

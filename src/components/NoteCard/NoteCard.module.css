@@ -1,0 +1,51 @@
+.noteCard {
+    display: grid;
+    grid-template-columns: 80% auto;
+    width: 250px;
+    height: 260px;
+    border-radius: 20px;
+    grid-gap: 10px;
+    background-color: coral;
+    padding: 24px 20px;
+    justify-content: space-between;
+}
+
+.noteCard__body {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 22px;
+}
+
+.noteCard__data {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 22px;
+}
+
+.noteCard__info {
+    max-width: 160px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.noteCard__btn {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: var(--dark-color);
+    border: none;
+    cursor: pointer;
+    img {
+        width: 14px;
+        height: 14px;
+    }
+}
+
+.noteCard__btns {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
