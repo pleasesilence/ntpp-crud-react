@@ -2,6 +2,7 @@
     --dark-color: #1A1A1A;
     --light-color: #FFFFFF;
     --grey-color: #B2B1B1;
+
     --yellow-color: #F5CC00;
 }
 
@@ -33,7 +34,9 @@
 }
 
 .App {
-    padding: 70px;
+    display: grid;
+    grid-template-columns: 170px auto;
+    height: 100vh;
 }
 
 .title {

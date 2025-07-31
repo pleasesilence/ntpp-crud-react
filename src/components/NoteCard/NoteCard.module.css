@@ -1,51 +1,76 @@
 .noteCard {
     display: grid;
-    grid-template-columns: 80% auto;
     width: 250px;
     height: 260px;
+    grid-template-columns: 80% 20%;
     border-radius: 20px;
-    grid-gap: 10px;
-    background-color: coral;
-    padding: 24px 20px;
-    justify-content: space-between;
+    padding: 20px;
+    transition: transform 0.2s;
 }
 
-.noteCard__body {
-    font-size: 18px;
-    font-weight: 500;
-    line-height: 22px;
+.noteCard_selected {
+    outline: 1px solid;
+    transform: scale(1.05);
 }
 
-.noteCard__data {
-    font-size: 18px;
-    font-weight: 500;
-    line-height: 22px;
-}
-
-.noteCard__info {
-    max-width: 160px;
-    width: 100%;
+.noteCard__content {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
-.noteCard__btn {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    background-color: var(--dark-color);
-    border: none;
-    cursor: pointer;
-    img {
-        width: 14px;
-        height: 14px;
-    }
+.noteCard__text {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 22px;
 }
 
 .noteCard__btns {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-end;
 }
+
+.noteCard__btn {
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--dark-color);
+    cursor: pointer;
+    img {
+        width: 14px;
+        height: 14px;
+        user-select: none;
+        transition: transform 0.2s;
+    }
+}
+
+.noteCard__btn:hover {
+    img {
+        transform: scale(1.1);
+    }
+}
+
+.noteCard__btn:active {
+    img {
+        animation: rotateImg 0.4s ease-in-out forwards;
+    }
+}
+
+@keyframes rotateImg {
+    from {
+        transform: scale(1) ;
+    }
+    50% {
+        transform: scale(1.4);
+    }
+    to {
+        transform: scale(1) ;
+    }
+}
+

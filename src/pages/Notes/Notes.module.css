@@ -1,0 +1,6 @@
+.note {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+    padding: 50px 70px;
+}
