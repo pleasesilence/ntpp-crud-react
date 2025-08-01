@@ -4,8 +4,9 @@
     height: 260px;
     grid-template-columns: 80% 20%;
     border-radius: 20px;
-    padding: 20px;
-    transition: transform 0.2s;
+    padding: 28px;
+    outline: 1px transparent;
+    transition: all 0.2s;
 }
 
 .noteCard_selected {
@@ -42,23 +43,30 @@
     align-items: center;
     background-color: var(--dark-color);
     cursor: pointer;
-    img {
+    svg {
         width: 14px;
         height: 14px;
         user-select: none;
-        transition: transform 0.2s;
+        transition: all 0.2s;
+        color: var(--light-color);
     }
 }
 
 .noteCard__btn:hover {
-    img {
+    svg {
         transform: scale(1.1);
     }
 }
 
-.noteCard__btn:active {
-    img {
+.noteCard__btn_changing {
+    svg {
         animation: rotateImg 0.4s ease-in-out forwards;
+    }
+}
+
+.noteCard__btn_favorite {
+    svg {
+        color: var(--yellow-color);
     }
 }
 

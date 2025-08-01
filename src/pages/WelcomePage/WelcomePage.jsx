@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Welcome = () => {
+const WelcomePage = () => {
     return (
         <div>
             <h1>WSElconme</h1>
@@ -8,4 +8,4 @@ const Welcome = () => {
     );
 };
 
-export default Welcome;
+export default WelcomePage;

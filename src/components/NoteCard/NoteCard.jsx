@@ -1,33 +1,40 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import styles from './NoteCard.module.css';
+import {SelectContext} from "../NoteContainer/NoteContainer";
+import {ReactComponent as StarSvg} from "../../assets/icons/star.svg";
+import {ReactComponent as PenSvg} from "../../assets/icons/pen.svg";
 
-function NoteCard({noteColor, isSelected, ...props}) {
+function NoteCard({noteData, selectNote, toggleModal, ...props}) {
     const [isFavorite, setIsFavorite] = useState(false);
-
     function makeFavorite(e) {
         e.stopPropagation();
         setIsFavorite(!isFavorite);
     }
 
+    const whatIsSelected = useContext(SelectContext);
+
     return (
-        <div style={{backgroundColor: noteColor}} className={isSelected ? [styles.noteCard, styles.noteCard_selected].join(' ') : styles.noteCard}>
+        <article
+            style={{backgroundColor: noteData.options.color.defaultValue}}
+            onMouseEnter={() => selectNote(noteData.id)}
+            onMouseLeave={() => selectNote('')}
+            className={whatIsSelected === noteData.id ? [styles.noteCard, styles.noteCard_selected].join(' ') : styles.noteCard}
+        >
             <div className={styles.noteCard__content}>
-                <p className={styles.noteCard__text}>Launching exo-machine. A computer that can be a monster gaming with videohosting and houseediting</p>
-                <p className={styles.noteCard__text}>May 12, 2021 </p>
+                <p className={styles.noteCard__text}>{noteData.name}</p>
+                <p className={styles.noteCard__text}>{noteData.options.date.defaultValue}</p>
             </div>
             <div className={styles.noteCard__btns}>
-                <button className={styles.noteCard__btn} onClick={makeFavorite}>
-                    {isFavorite ? (
-                        <img src="/icons/star.svg" alt="star-icon"/>
-                    ) : <img src="/icons/star_inactive.svg" alt="star-icon"/>}
+                <button  className={isFavorite ? [styles.noteCard__btn, styles.noteCard__btn_favorite].join(' ') : styles.noteCard__btn} onClick={makeFavorite}>
+                    <StarSvg></StarSvg>
                 </button>
-                {isSelected ? (
-                    <button className={styles.noteCard__btn}>
-                        <img src="/icons/pen.svg" alt="pen-icon"/>
+                {whatIsSelected === noteData.id ? (
+                    <button onClick={() => toggleModal(noteData)} className={styles.noteCard__btn}>
+                        <PenSvg></PenSvg>
                     </button>
                 ) : <></>}
             </div>
-        </div>
+        </article>
     )
 }
 

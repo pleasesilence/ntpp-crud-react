@@ -9,7 +9,7 @@ const SearchField = () => {
         <div className={styles.searchField}>
             <input onChange={(e) => setSearchField(e.target.value)} value={searchField} placeholder='Search' type="text" className={styles.searchField__input}/>
             <button className={styles.searchField__button}>
-                <img src="/icons/search.svg" alt=""/>
+                <img src="/src/assets/icons/search.svg" alt=""/>
             </button>
         </div>
     );

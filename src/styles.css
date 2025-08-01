@@ -33,12 +33,6 @@
     font-style: normal;
 }
 
-.App {
-    display: grid;
-    grid-template-columns: 170px auto;
-    height: 100vh;
-}
-
 .title {
     font-weight: 600;
     font-size: 48px;

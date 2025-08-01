@@ -1,22 +1,18 @@
-import React, {StrictMode} from "react";
-import Notes from "./pages/Notes/Notes";
-import {BrowserRouter, Routes, Route} from 'react-router';
-import SideBar from "./components/SideBar/SideBar";
-import Welcome from "./pages/Welcome/Welcome";
+import React from "react";
+import {Routes, Route, BrowserRouter} from 'react-router';
+import NotesPage from './pages/NotesPage/NotesPage';
+import WelcomePage from "./pages/WelcomePage/WelcomePage";
 
 function App() {
     return (
         <div className="App">
             <BrowserRouter>
                 <Routes>
-                    <Route element={<SideBar></SideBar>}>
-                        <Route path='home' element={<Notes></Notes>}/>
-                        <Route path='welcome' element={<Welcome></Welcome>}></Route>
-                    </Route>
+                    <Route index element={<NotesPage/>}></Route>
+                    <Route path='/welcome' element={<WelcomePage/>}></Route>
                 </Routes>
             </BrowserRouter>
         </div>
-
     )
 }
 
