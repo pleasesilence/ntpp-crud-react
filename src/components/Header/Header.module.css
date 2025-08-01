@@ -1,0 +1,22 @@
+.header {
+    height: 68px;
+    border-bottom: 1px solid var(--grey-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header__nav {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 78px;
+}
+
+.header__link {
+    color: var(--dark-color);
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 29px;
+}

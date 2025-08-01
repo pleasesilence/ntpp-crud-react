@@ -5,12 +5,10 @@
     grid-template-columns: 80% 20%;
     border-radius: 20px;
     padding: 28px;
-    outline: 1px transparent;
-    transition: all 0.2s;
+    transition: transform 0.2s;
 }
 
 .noteCard_selected {
-    outline: 1px solid;
     transform: scale(1.05);
 }
 

@@ -1,6 +1,7 @@
 .editor {
     width: 100%;
-    height: 100%;
+    max-height: 880px;
+    overflow-y: auto;
 }
 
 .editor__wrapper {
@@ -27,6 +28,8 @@
     font-weight: 600;
     line-height: 44px;
     color: var(--dark-color);
+    outline: none;
+    border: none;
 }
 
 .editor__options {
@@ -46,10 +49,98 @@
     font-weight: 500;
     line-height: 29px;
     color: var(--grey-color);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    svg {
+        width: 20px;
+        height: 20px;
+    }
 }
 
 .editor__optionsValues {
     justify-content: space-between;
     display: flex;
     flex-direction: column;
+    button {
+        padding: 4px 16px 4px 16px;
+        border-radius: 50px;
+        border: none;
+        font-size: 24px;
+        font-weight: 500;
+        line-height: 29px;
+    }
+}
+
+.editor__optionFavorite {
+    color: #726969;
+    background-color: #EFEDE6;
+    cursor: pointer;
+}
+.editor__optionFavorite_active {
+    color: var(--light-color);
+    background-color: var(--yellow-color);
+    cursor: pointer;
+}
+
+.editor__optionSize_medium {
+    color: #5B4A1E;
+    background-color: #D6B54F;
+    cursor: pointer;
+}
+.editor__optionSize_large {
+    color: #703030;
+    background-color: #CD5959;
+    cursor: pointer;
+}
+
+.editor__optionDate {
+    background-color: transparent;
+    cursor: auto;
+}
+
+
+.editor__description {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.description__subtitle {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 29px;
+}
+
+.description__content {
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 29px;
+    border: none;
+    outline: none;
+    width: 100%;
+    height: 100px;
+    overflow: hidden;
+    resize: none;
+    display: block;
+}
+
+.editor__save {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: none;
+    background-color: transparent;
+    font-size: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    position: absolute;
+    top: 54px;
+    right: 68px;
+    svg {
+        width: 24px;
+        height: 24px;
+    }
 }

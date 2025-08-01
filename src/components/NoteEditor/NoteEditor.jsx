@@ -1,45 +1,155 @@
-import React from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import styles from "./NoteEditor.module.css";
-import Option from "../Option/Option";
 
-function NoteEditor({noteData}) {
-    if (!noteData || noteData.target) {
-        return (
-            <></>
-        )
+import {ReactComponent as StarSvg} from "../../assets/icons/editor/star.svg";
+import {ReactComponent as SizeSvg} from "../../assets/icons/editor/size.svg";
+import {ReactComponent as DateSvg} from "../../assets/icons/editor/date.svg";
+import {ReactComponent as ColorSvg} from "../../assets/icons/editor/color.svg";
+import {ReactComponent as SaveSvg} from "../../assets/icons/editor/save.svg";
+
+import {updateNote} from "../../helpers/noteDataControl";
+
+function NoteEditor({noteData, updateState, currentNotes, visible}) {
+
+    const options = noteData.options
+    const [favoriteState, setFavoriteState] = useState(options.favorite.value);
+    const [sizeState, setSizeState] = useState(options.size.value);
+    const [descriptionState, setDescriptionState] = useState(noteData.description);
+    const [nameState, setNameState] = useState(noteData.name);
+
+    const textarea = useRef(null);
+
+    useEffect(() => {
+        textarea.current.style.height = textarea.current.scrollHeight + "px";
+    }, [])
+
+    function handleTextarea(event) {
+        setDescriptionState(event.target.value);
+        textarea.current.style.height = 'auto';
+        textarea.current.style.height = textarea.current.scrollHeight + "px";
     }
 
-    const noteDataOptions = Object.keys(noteData.options);
-    const noteDataOptionsValues = Object.values(noteData.options);
+    function toggleFavoriteState() {
+        setFavoriteState(!favoriteState);
+    }
+    const favoriteClasses = [styles.editor__optionFavorite]
+    if (favoriteState) {
+        favoriteClasses.push(styles.editor__optionFavorite_active)
+    }
+
+    function toggleSizeState() {
+        if (sizeState === 'Medium') {
+            setSizeState('Large');
+        } else {
+            setSizeState('Medium');
+        }
+    }
+    let sizeClass
+    if (sizeState === 'Medium') {
+        sizeClass = styles.editor__optionSize_medium
+    } else {
+        sizeClass = styles.editor__optionSize_large
+    }
+
+    const editorStates = {
+        favoriteState: favoriteState,
+        sizeState: sizeState,
+        descriptionState: descriptionState,
+        nameState: nameState,
+    }
+
+    function updateNoteAndState(noteData) {
+        let oldNoteIndex;
+        let copyCurrentNotes = currentNotes;
+        copyCurrentNotes.forEach((note, index) => {
+            if (noteData.id === note.id) {
+                oldNoteIndex = index
+            }
+        })
+        if (oldNoteIndex > -1) {
+            copyCurrentNotes.splice(oldNoteIndex, 1)
+        }
+        const updatedNote = updateNote(noteData, editorStates)
+        updateState([...copyCurrentNotes, updatedNote])
+    }
+
 
     return (
         <section className={styles.editor}>
             <div className={styles.editor__wrapper}>
                 <div className={styles.editor__header}>
                     <div className={styles.editor__subtitle}>Editing note</div>
-                    <div className={styles.editor__name}>{noteData.name}</div>
+                    <input
+                        name='Note name'
+                        className={styles.editor__name}
+                        type="text"
+                        value={nameState}
+                        onChange={e => setNameState(e.target.value)}
+                    />
                     <div className={styles.editor__options}>
                         <div className={styles.editor__optionsNames}>
-                            {noteDataOptions.map(option => (
-                                <div key={option} className={styles.editor__optionName}>
-                                    {option[0].toUpperCase() + option.slice(1)}
-                                </div>
-                            ))}
+                            <div className={styles.editor__optionName}>
+                                <StarSvg></StarSvg>
+                                <div>Status</div>
+                            </div>
+                            <div className={styles.editor__optionName}>
+                                <SizeSvg></SizeSvg>
+                                <div>Size</div>
+                            </div>
+                            <div className={styles.editor__optionName}>
+                                <ColorSvg></ColorSvg>
+                                <div>Color</div>
+                            </div>
+                            <div className={styles.editor__optionName}>
+                                <DateSvg></DateSvg>
+                                <div>Due date</div>
+                            </div>
                         </div>
                         <div className={styles.editor__optionsValues}>
-                            {noteDataOptionsValues.map((optionValue, index) => (
-                                <Option mode={optionValue.mode} key={optionValue.defaultValue} className={styles.editor__optionValue}>
-                                    {String(optionValue.defaultValue)}
-                                </Option>
-                            ))}
+                            <button
+                                onClick={toggleFavoriteState}
+                                className={favoriteClasses.join(' ')}
+                            >
+                                {favoriteState ? "Favorite" : "Default"}
+                            </button>
+                            <button
+                                onClick={toggleSizeState}
+                                className={sizeClass}
+                            >
+                                {sizeState === 'Medium' ? "Medium" : "Large"}
+                            </button>
+                            <button
+                                className={styles.editor__optionColor}
+                                style={{backgroundColor: options.color.value}}
+                            >
+                                {options.color.value}
+                            </button>
+                            <button className={styles.editor__optionDate}>
+                                {options.date.value}
+                            </button>
+                        </div>
+                    </div>
+                    <hr/>
+                    <div className={styles.editor__description}>
+                        <div className={styles.description__subtitle}>Description</div>
+                        <div>
+                            <textarea
+                                ref={textarea}
+                                name="description"
+                                className={styles.description__content}
+                                value={descriptionState}
+                                onChange={handleTextarea}
+                            />
                         </div>
                     </div>
                 </div>
-                <div className={styles.editor__body}>
-
-                </div>
-                <div className="editor__body"></div>
             </div>
+            <button
+                onClick={() => updateNoteAndState(noteData, editorStates)}
+                className={styles.editor__save}
+            >
+                <SaveSvg></SaveSvg>
+            </button>
         </section>
     );
 }

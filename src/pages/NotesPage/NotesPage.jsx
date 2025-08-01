@@ -4,11 +4,8 @@ import NoteContainer from "../../components/NoteContainer/NoteContainer";
 import SearchField from "../../components/SearchField/SearchField";
 import SideBarLayout from "../../components/SideBarLayout/SideBarLayout";
 import ModalWindow from "../../components/ModalWindow/ModalWindow";
-
-import makeDateReadable from "../../helpers/makeDateReadable";
-import addItemToLocalStorage from "../../helpers/addItemToLocalStorage";
 import NoteEditor from "../../components/NoteEditor/NoteEditor";
-
+import {createNote, updateNote} from "../../helpers/noteDataControl";
 
 export const NoteContext = createContext(null);
 
@@ -22,52 +19,36 @@ const NotesPage = () => {
     const [isModalActive, setIsModalActive] = React.useState(false);
     const [currentData, setCurrentData] = React.useState(null);
 
-    function toggleModal(data) {
-        setIsModalActive(!isModalActive);
+    function createNoteAndUpdateState(color) {
+        const newNote = createNote(color)
+        setNotes([...notes, newNote]);
+    }
+
+    function buildModal(data) {
+        setIsModalActive(true);
         setCurrentData(data);
     }
 
-    function createNote(color) {
-        const newNote = {
-            id: Date.now(),
-            name: "This is NTPP note.",
-            description: 'NTPP note',
-            options: {
-                favorite: {
-                    defaultValue: false,
-                    values: [true, false],
-                    mode: 'toggle'
-                },
-                color: {
-                    defaultValue: color,
-                    mode: 'colorPick'
-                },
-                size: {
-                    defaultValue: 'medium',
-                    values: ['medium', 'large'],
-                    mode: 'toggle'
-                },
-                date: {
-                    defaultValue: makeDateReadable(new Date()),
-                    mode: 'text'
-                }
-            }
-        }
-        addItemToLocalStorage('notes', newNote);
-        setNotes([...notes, newNote]);
+    function disableModal() {
+        setIsModalActive(false);
     }
+
     return (
-        <NoteContext.Provider value={{createNote, notes}}>
+        <NoteContext.Provider value={{createNoteAndUpdateState, notes}}>
             <main className={styles.noteWrapper}>
                 <SideBarLayout></SideBarLayout>
                 <section className={styles.note}>
                     <SearchField></SearchField>
-                    <NoteContainer toggleModal={toggleModal}></NoteContainer>
+                    <NoteContainer toggleModal={buildModal}></NoteContainer>
                 </section>
             </main>
-            <ModalWindow setVisible={toggleModal} visible={isModalActive}>
-                {<NoteEditor noteData={currentData}/>}
-            </ModalWindow>
+            {
+                isModalActive ? (
+                    <ModalWindow visible={isModalActive} disableVisible={disableModal}>
+                        <NoteEditor updateState={setNotes} currentNotes={notes} visible={isModalActive} noteData={currentData}></NoteEditor>
+                    </ModalWindow>
+                ) : <></>
+            }
         </NoteContext.Provider>
 
     );

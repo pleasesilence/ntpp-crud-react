@@ -1,17 +1,10 @@
 import React from "react";
-import {Routes, Route, BrowserRouter} from 'react-router';
-import NotesPage from './pages/NotesPage/NotesPage';
-import WelcomePage from "./pages/WelcomePage/WelcomePage";
+import AppRouter from "./components/AppRouter/AppRouter";
 
 function App() {
     return (
         <div className="App">
-            <BrowserRouter>
-                <Routes>
-                    <Route index element={<NotesPage/>}></Route>
-                    <Route path='/welcome' element={<WelcomePage/>}></Route>
-                </Routes>
-            </BrowserRouter>
+            <AppRouter></AppRouter>
         </div>
     )
 }
