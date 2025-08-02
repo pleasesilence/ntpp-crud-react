@@ -8,10 +8,7 @@ import {useNavigate} from 'react-router';
 function NoteCard({noteData, selectNote, toggleModal, ...props}) {
     const whatIsSelected = useContext(SelectContext);
     const isFavorite = noteData.options.favorite.value
-
-    function makeFavorite() {
-
-    }
+    const size = noteData.options.size.value
 
     const navigate = useNavigate();
     function handleCardClick() {
@@ -23,9 +20,18 @@ function NoteCard({noteData, selectNote, toggleModal, ...props}) {
         toggleModal(noteData)
     }
 
+    function calcSize() {
+        return size === 'Medium' ? 250 : 350
+    }
+
+    const noteCardStyles = {
+        backgroundColor: noteData.options.color.value,
+        width: calcSize() + 'px'
+    }
+
     return (
         <article
-            style={{backgroundColor: noteData.options.color.value}}
+            style={noteCardStyles}
             onMouseEnter={() => selectNote(noteData.id)}
             onMouseLeave={() => selectNote('')}
             className={whatIsSelected === noteData.id ? [styles.noteCard, styles.noteCard_selected].join(' ') : styles.noteCard}
@@ -36,14 +42,13 @@ function NoteCard({noteData, selectNote, toggleModal, ...props}) {
                 <p className={styles.noteCard__text}>{noteData.options.date.value}</p>
             </div>
             <div className={styles.noteCard__btns}>
-                <button
+                <div
                     className={isFavorite ?
                         [styles.noteCard__btn, styles.noteCard__btn_favorite].join(' ')
                         : styles.noteCard__btn}
-                    onClick={makeFavorite}
                 >
                     <StarSvg></StarSvg>
-                </button>
+                </div>
                 {whatIsSelected === noteData.id ? (
                     <button onClick={handleEditClick} className={styles.noteCard__btn}>
                         <PenSvg></PenSvg>

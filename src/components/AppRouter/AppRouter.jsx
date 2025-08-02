@@ -9,7 +9,10 @@ const AppRouter = () => {
         <BrowserRouter>
             <Routes>
                 <Route index exact path='/notes' element={<NotesPage/>}></Route>
-                <Route path='/settings' element={<SettingsPage/>}></Route>
+                <Route path='/settings'>
+                    <Route path='/settings/appearance' element={<SettingsPage/>}></Route>
+                    <Route path='/settings/statistics' element={<SettingsPage/>}></Route>
+                </Route>
                 <Route exact path='/notes/:id' element={<NotePageId/>}></Route>
                 <Route path='*' element={<Navigate to='/notes'></Navigate>}></Route>
             </Routes>

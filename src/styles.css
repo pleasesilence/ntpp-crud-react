@@ -2,8 +2,9 @@
     --dark-color: #1A1A1A;
     --light-color: #FFFFFF;
     --grey-color: #B2B1B1;
-
+    --dark-grey-color: #726969;
     --yellow-color: #F5CC00;
+    --blue-color: #5D6FE3;
 }
 
 * {

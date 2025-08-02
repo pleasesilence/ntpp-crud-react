@@ -9,8 +9,7 @@ import {ReactComponent as SaveSvg} from "../../assets/icons/editor/save.svg";
 
 import {updateNote} from "../../helpers/noteDataControl";
 
-function NoteEditor({noteData, updateState, currentNotes, visible}) {
-
+function NoteEditor({noteData, updateState, currentNotes}) {
     const options = noteData.options
     const [favoriteState, setFavoriteState] = useState(options.favorite.value);
     const [sizeState, setSizeState] = useState(options.size.value);

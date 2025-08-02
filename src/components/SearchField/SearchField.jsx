@@ -1,12 +1,17 @@
 import React, {useState} from 'react';
 import styles from './SearchField.module.css'
 
-const SearchField = () => {
+const SearchField = ({handleSearchChange}) => {
     const [searchField, setSearchField] = useState('')
+
+    function handleChange(event) {
+        setSearchField(event.target.value)
+        handleSearchChange(event.target.value)
+    }
 
     return (
         <div className={styles.searchField}>
-            <input onChange={(e) => setSearchField(e.target.value)} value={searchField} placeholder='Search' type="text" className={styles.searchField__input}/>
+            <input onChange={handleChange} value={searchField} placeholder='Search' type="text" className={styles.searchField__input}/>
         </div>
     );
 };

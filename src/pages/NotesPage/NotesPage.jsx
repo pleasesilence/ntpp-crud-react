@@ -1,13 +1,11 @@
-import React, {createContext} from 'react';
+import React, {createRef, useMemo, useState} from 'react';
 import styles from './NotesPage.module.css'
 import NoteContainer from "../../components/NoteContainer/NoteContainer";
 import SearchField from "../../components/SearchField/SearchField";
 import SideBarLayout from "../../components/SideBarLayout/SideBarLayout";
 import ModalWindow from "../../components/ModalWindow/ModalWindow";
 import NoteEditor from "../../components/NoteEditor/NoteEditor";
-import {createNote, updateNote} from "../../helpers/noteDataControl";
-
-export const NoteContext = createContext(null);
+import {createNote} from "../../helpers/noteDataControl";
 
 const NotesPage = () => {
     const [notes, setNotes] =
@@ -15,9 +13,21 @@ const NotesPage = () => {
         ? JSON.parse(localStorage.getItem("notes"))
         : []
     );
+    const [isModalActive, setIsModalActive] = useState(false);
+    const [currentData, setCurrentData] = useState(null);
+    const [searchQuery, setSearchQuery] = useState('');
 
-    const [isModalActive, setIsModalActive] = React.useState(false);
-    const [currentData, setCurrentData] = React.useState(null);
+    const sortedNotes = useMemo(() => {
+        return [...notes].sort((a, b) => a.id - b.id);
+    }, [notes])
+
+    const sortedAndSearchedNotes = useMemo(() => {
+        return sortedNotes.filter(note => note.name.includes(searchQuery))
+    }, [sortedNotes, searchQuery]);
+
+    function handleSearchChange(newState) {
+        setSearchQuery(newState)
+    }
 
     function createNoteAndUpdateState(color) {
         const newNote = createNote(color)
@@ -34,12 +44,12 @@ const NotesPage = () => {
     }
 
     return (
-        <NoteContext.Provider value={{createNoteAndUpdateState, notes}}>
+        <div>
             <main className={styles.noteWrapper}>
-                <SideBarLayout></SideBarLayout>
+                <SideBarLayout isCreateActive={true} createNoteAndUpdateState={createNoteAndUpdateState}></SideBarLayout>
                 <section className={styles.note}>
-                    <SearchField></SearchField>
-                    <NoteContainer toggleModal={buildModal}></NoteContainer>
+                    <SearchField handleSearchChange={handleSearchChange}></SearchField>
+                    <NoteContainer notes={sortedAndSearchedNotes} toggleModal={buildModal}></NoteContainer>
                 </section>
             </main>
             {
@@ -49,8 +59,7 @@ const NotesPage = () => {
                     </ModalWindow>
                 ) : <></>
             }
-        </NoteContext.Provider>
-
+        </div>
     );
 };
 

@@ -1,0 +1,26 @@
+.stats__wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 34px;
+    width: 70%;
+}
+
+.stats__label {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.stats__name {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 29px;
+}
+
+.stats__value {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 29px;
+    color: var(--blue-color);
+}

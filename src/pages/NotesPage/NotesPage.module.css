@@ -2,11 +2,5 @@
     display: flex;
     flex-direction: column;
     gap: 60px;
-    padding: 50px 70px;
-}
-
-.noteWrapper {
-    display: grid;
-    grid-template-columns: 128px auto;
-    height: 100vh;
+    padding: 50px 70px 50px 198px;
 }

@@ -1,11 +1,11 @@
 .noteCard {
     display: grid;
-    width: 250px;
     height: 260px;
     grid-template-columns: 80% 20%;
     border-radius: 20px;
     padding: 28px;
     transition: transform 0.2s;
+    cursor: pointer;
 }
 
 .noteCard_selected {

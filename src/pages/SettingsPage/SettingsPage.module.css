@@ -1,0 +1,56 @@
+.settings__content {
+    padding: 50px 70px 50px 198px;
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+}
+
+.settings__title {
+    font-size: 48px;
+    font-weight: 600;
+    line-height: 59px;
+}
+
+.settings__header {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    gap: 16px;
+}
+
+.settings__subtitle {
+    font-size: 36px;
+    font-weight: 600;
+    line-height: 44px;
+    color: var(--grey-color)
+}
+
+.settings__options {
+    display: flex;
+    flex-direction: row;
+    gap: 140px;
+}
+
+.tabs {
+    display: flex;
+    flex-direction: column;
+    gap: 34px;
+    align-items: center;
+}
+
+.tab {
+    background: none;
+    border: none;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 29px;
+    cursor: pointer;
+    padding: 12px 24px;
+
+}
+
+.tab_active {
+    background: var(--blue-color);
+    color: var(--light-color);
+    border-radius: 50px;
+}

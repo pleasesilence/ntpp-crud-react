@@ -5,9 +5,8 @@ import {NoteContext} from "../../pages/NotesPage/NotesPage";
 
 export const SelectContext = createContext(null);
 
-const NoteContainer = ({children, toggleModal}) => {
+const NoteContainer = ({notes, toggleModal}) => {
 
-    const {notes} = useContext(NoteContext);
     const [isSelected, setIsSelected] = useState('');
 
     function selectNote(id) {

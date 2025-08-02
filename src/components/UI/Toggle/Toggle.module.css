@@ -1,0 +1,29 @@
+.toggle__body {
+    width: 60px;
+    height: 30px;
+    background: var(--grey-color);
+    border-radius: 50px;
+    border: none;
+    padding: 4px;
+    transition: all 0.2s;
+    position: relative;
+}
+
+.toggle__circle {
+    position: absolute;
+    top: 50%;
+    left: 4px;
+    transform: translateY(-50%);
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--light-color);
+    transition: all 0.2s;
+}
+
+.toggle__body_active {
+    background: var(--blue-color);
+    .toggle__circle {
+        left: 32px;
+    }
+}

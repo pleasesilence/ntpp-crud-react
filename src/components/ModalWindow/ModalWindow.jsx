@@ -8,8 +8,12 @@ function ModalWindow({children, visible, disableVisible}) {
         rootStyles.push(styles.modal_active)
     }
 
+    function handleClose() {
+        disableVisible()
+    }
+
     return (
-        <div onClick={disableVisible} className={rootStyles.join(' ')}>
+        <div onClick={handleClose} className={rootStyles.join(' ')}>
             <div onClick={e => e.stopPropagation()} className={styles.modal__content}>
                 {children}
             </div>

@@ -1,4 +1,6 @@
-.notePageId {}
+.notePageId {
+    padding-left: 128px;
+}
 
 .notePageId__bg {
     width: 100%;
