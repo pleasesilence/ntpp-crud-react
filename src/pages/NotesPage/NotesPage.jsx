@@ -6,6 +6,7 @@ import SideBarLayout from "../../components/SideBarLayout/SideBarLayout";
 import ModalWindow from "../../components/ModalWindow/ModalWindow";
 import NoteEditor from "../../components/NoteEditor/NoteEditor";
 import {createNote} from "../../helpers/noteDataControl";
+import {Helmet} from "react-helmet";
 
 const NotesPage = () => {
     const [notes, setNotes] =
@@ -45,6 +46,7 @@ const NotesPage = () => {
 
     return (
         <div>
+            <Helmet title='NTPP | Notes'/>
             <main className={styles.noteWrapper}>
                 <SideBarLayout isCreateActive={true} createNoteAndUpdateState={createNoteAndUpdateState}></SideBarLayout>
                 <section className={styles.note}>

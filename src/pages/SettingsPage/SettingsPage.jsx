@@ -5,6 +5,7 @@ import AppearanceOptions from "../../components/AppearanceOptions/AppearanceOpti
 import StatisticsOptions from "../../components/StatisticsOptions/StatisticsOptions";
 import {Link} from "react-router";
 import {useTranslate} from "../../hooks/useTranslate";
+import {Helmet} from "react-helmet";
 
 const SettingsPage = () => {
     const [activeTab, setActiveTab] = React.useState('Appearance');
@@ -28,6 +29,7 @@ const SettingsPage = () => {
 
     return (
         <div className={styles.settings}>
+            <Helmet title={'NTPP | Settings'}/>
             <SideBarLayout isCreateActive={false}></SideBarLayout>
             <section className={styles.settings__content}>
                 <div className={styles.settings__header}>

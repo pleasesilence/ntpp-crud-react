@@ -3,6 +3,7 @@ import {useParams} from 'react-router';
 import styles from "./NotePageId.module.css";
 import {ReactComponent as StarSvg} from "../../assets/icons/star.svg";
 import SideBarLayout from "../../components/SideBarLayout/SideBarLayout";
+import {Helmet} from "react-helmet";
 
 const NotePageId = () => {
     const params = useParams();
@@ -15,8 +16,10 @@ const NotePageId = () => {
         }
     })
 
+    const notePageIdTitle = `NTPP | ${thisNoteData.name}`
     return (
         <>
+            <Helmet title={notePageIdTitle}/>
             <SideBarLayout isCreateActive={false}></SideBarLayout>
             <div className={styles.notePageId}>
                 <div style={{backgroundColor: thisNoteData.options.color.value}} className={styles.notePageId__bg}></div>

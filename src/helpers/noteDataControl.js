@@ -1,17 +1,22 @@
 import makeDateReadable from "./makeDateReadable";
 import addItemToLocalStorage from "./addItemToLocalStorage";
 
-export function updateNote(noteData, states) {
+function returnArrWithoutNote(needId) {
     const prevStorage = JSON.parse(localStorage.getItem("notes"));
     let prevNoteIndex
     prevStorage.forEach((item, index) => {
-        if (item.id === noteData.id) {
+        if (item.id === needId) {
             prevNoteIndex = index
         }
     })
     if (prevNoteIndex > -1) {
         prevStorage.splice(prevNoteIndex, 1)
     }
+    return prevStorage
+}
+
+export function updateNote(noteData, states) {
+    const prevStorage = returnArrWithoutNote(noteData.id)
     const updatedNote = {
         id: noteData.id,
         name: states.nameState,
@@ -62,16 +67,7 @@ export function createNote(color) {
 }
 
 export function deleteNote(noteData) {
-    const prevStorage = JSON.parse(localStorage.getItem("notes"));
-    let prevNoteIndex;
-    prevStorage.forEach((item, index) => {
-        if (item.id === noteData.id) {
-            prevNoteIndex = index
-        }
-    })
-    if (prevNoteIndex > -1) {
-        prevStorage.splice(prevNoteIndex, 1)
-    }
+    const prevStorage = returnArrWithoutNote(noteData.id)
     localStorage.removeItem("notes");
     localStorage.setItem("notes", JSON.stringify(prevStorage));
     return prevStorage;
