@@ -1,4 +1,12 @@
-:root {
+* {
+    font-family: "Montserrat", sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    transition: color 0.2s ease-in, background-color 0.2s ease-in;
+}
+
+.App {
     --dark-color: #1A1A1A;
     --light-color: #FFFFFF;
     --grey-color: #B2B1B1;
@@ -7,11 +15,9 @@
     --blue-color: #5D6FE3;
 }
 
-* {
-    font-family: "Montserrat", sans-serif;
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+.App_dark {
+    --dark-color: #FFFFFF;
+    --light-color: #292929;
 }
 
 @font-face {

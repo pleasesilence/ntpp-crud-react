@@ -3,4 +3,6 @@
     flex-direction: column;
     gap: 60px;
     padding: 50px 70px 50px 198px;
+    min-height: 100vh;
+    background-color: var(--light-color);
 }

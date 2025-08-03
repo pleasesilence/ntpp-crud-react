@@ -1,20 +1,31 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect} from 'react';
 import styles from './AppearanceOptions.module.css'
 import Option from '../Option/Option'
 import {useTranslate} from "../../hooks/useTranslate";
-import {LangContext} from "../../App";
+import {LangContext, ThemeContext} from "../../App";
 import {updateSettingsOption} from "../../helpers/settingsDataControl";
 
 const AppearanceOptions = () => {
 
     const {currentAppLanguage, setCurrentAppLanguage} = useContext(LangContext)
+    const {currentAppTheme, setCurrentAppTheme} = useContext(ThemeContext)
     const {translate} = useTranslate();
 
     function toggleAppLanguage() {
         setCurrentAppLanguage(currentAppLanguage === 'en' ? 'ru' : 'en')
     }
+    useEffect(() => {
+        updateSettingsOption('language', currentAppLanguage)
+    }, [currentAppLanguage])
 
-    updateSettingsOption('language', currentAppLanguage)
+
+    function toggleAppTheme() {
+        setCurrentAppTheme(currentAppTheme === 'light' ? 'dark' : 'light')
+    }
+    useEffect(() => {
+        updateSettingsOption('theme', currentAppTheme)
+    }, [currentAppTheme])
+
 
     function checkIsOptionOn(id) {
         try {
@@ -22,11 +33,12 @@ const AppearanceOptions = () => {
             if (!optionsState) {
                 throw new Error('No options state found');
             }
-            const isChecked = optionsState[id]
-            return isChecked;
+            return optionsState[id];
         } catch (e) {
-            // const idArr =
-            let defaultOptionsState = null
+            const defaultOptionsState = {
+                theme: false,
+                toggleLang: false
+            }
             localStorage.setItem('optionsState', JSON.stringify(defaultOptionsState));
             console.log(e)
             return false
@@ -37,14 +49,10 @@ const AppearanceOptions = () => {
         <div className={styles.appearance__wrapper}>
             <Option
                 id = 'theme'
+                isChecked={checkIsOptionOn}
+                action={toggleAppTheme}
                 name={translate('settings.appearance.toggleTheme')}
                 description={translate('settings.appearance.toggleThemeDesc')}
-            ></Option>
-            <hr/>
-            <Option
-                id = 'sidebarPos'
-                name={translate('settings.appearance.sidebarPos')}
-                description={translate('settings.appearance.sidebarPosDesc')}
             ></Option>
             <hr/>
             <Option

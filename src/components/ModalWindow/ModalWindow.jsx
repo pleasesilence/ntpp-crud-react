@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import styles from './ModalWindow.module.css';
 
 function ModalWindow({children, visible, disableVisible}) {
@@ -8,12 +8,26 @@ function ModalWindow({children, visible, disableVisible}) {
         rootStyles.push(styles.modal_active)
     }
 
-    function handleClose() {
+    function handleClick() {
         disableVisible()
     }
 
+    useEffect(() => {
+        function handleKeyDown(event) {
+            if (event.key === 'Escape') {
+                disableVisible()
+            }
+        }
+        document.addEventListener('keydown', handleKeyDown)
+        return () => {
+            document.removeEventListener('keydown', handleKeyDown)
+        }
+    }, [])
+
+
+
     return (
-        <div onClick={handleClose} className={rootStyles.join(' ')}>
+        <div onClick={handleClick} className={rootStyles.join(' ')}>
             <div onClick={e => e.stopPropagation()} className={styles.modal__content}>
                 {children}
             </div>

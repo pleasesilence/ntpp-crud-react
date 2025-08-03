@@ -24,7 +24,7 @@ const NoteContainer = ({notes, toggleModal}) => {
                     {notes.length > 0 ?
                         notes.map((note) => (
                             <NoteCard toggleModal={toggleModal} key={note.id} noteData={note} selectNote={selectNote}/>
-                        )): <p>{translate('notes.zeroNotes')}</p>}
+                        )): <div className={styles.noteContainer__none}>{translate('notes.zeroNotes')}</div>}
                 </div>
             </div>
         </SelectContext.Provider>

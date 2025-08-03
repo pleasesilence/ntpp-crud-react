@@ -3,7 +3,7 @@ import SideBarLayout from "../../components/SideBarLayout/SideBarLayout";
 import styles from './SettingsPage.module.css'
 import AppearanceOptions from "../../components/AppearanceOptions/AppearanceOptions";
 import StatisticsOptions from "../../components/StatisticsOptions/StatisticsOptions";
-import {Link, useParams} from "react-router";
+import {Link} from "react-router";
 import {useTranslate} from "../../hooks/useTranslate";
 
 const SettingsPage = () => {

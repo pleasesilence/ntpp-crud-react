@@ -6,11 +6,12 @@ import {ReactComponent as SizeSvg} from "../../assets/icons/editor/size.svg";
 import {ReactComponent as DateSvg} from "../../assets/icons/editor/date.svg";
 import {ReactComponent as ColorSvg} from "../../assets/icons/editor/color.svg";
 import {ReactComponent as SaveSvg} from "../../assets/icons/editor/save.svg";
+import {ReactComponent as DeleteSvg} from "../../assets/icons/editor/delete.svg";
 
-import {updateNote} from "../../helpers/noteDataControl";
+import {deleteNote, updateNote} from "../../helpers/noteDataControl";
 import {useTranslate} from "../../hooks/useTranslate";
 
-function NoteEditor({noteData, updateState, currentNotes}) {
+function NoteEditor({noteData, updateState, currentNotes, disableVisible}) {
     const options = noteData.options
     const [favoriteState, setFavoriteState] = useState(options.favorite.value);
     const [sizeState, setSizeState] = useState(options.size.value);
@@ -71,6 +72,22 @@ function NoteEditor({noteData, updateState, currentNotes}) {
         }
         const updatedNote = updateNote(noteData, editorStates)
         updateState([...copyCurrentNotes, updatedNote])
+        disableVisible()
+    }
+
+    function deleteNoteAndUpdateState(noteData) {
+        let oldNoteIndex;
+        let copyCurrentNotes = currentNotes;
+        copyCurrentNotes.forEach((note, index) => {
+            if (noteData.id === note.id) {
+                oldNoteIndex = index
+            }
+        })
+        if (oldNoteIndex > -1) {
+            copyCurrentNotes.splice(oldNoteIndex, 1)
+        }
+        updateState([...deleteNote(noteData)])
+        disableVisible()
     }
 
     const {translate} = useTranslate();
@@ -151,6 +168,12 @@ function NoteEditor({noteData, updateState, currentNotes}) {
                 className={styles.editor__save}
             >
                 <SaveSvg></SaveSvg>
+            </button>
+            <button
+                onClick={() => deleteNoteAndUpdateState(noteData)}
+                className={styles.editor__delete}
+            >
+                <DeleteSvg></DeleteSvg>
             </button>
         </section>
     );

@@ -55,7 +55,7 @@ const NotesPage = () => {
             {
                 isModalActive ? (
                     <ModalWindow visible={isModalActive} disableVisible={disableModal}>
-                        <NoteEditor updateState={setNotes} currentNotes={notes} visible={isModalActive} noteData={currentData}></NoteEditor>
+                        <NoteEditor updateState={setNotes} currentNotes={notes} noteData={currentData} disableVisible={disableModal}></NoteEditor>
                     </ModalWindow>
                 ) : <></>
             }

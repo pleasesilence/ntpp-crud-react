@@ -3,16 +3,20 @@ import styles from './Toggle.module.css';
 
 const Toggle = ({action, isChecked, id}) => {
 
-    const [checked, setChecked] = React.useState(false);
-
+    const [checked, setChecked] = React.useState(isChecked(id));
     const toggleBodyClasses = [styles.toggle__body]
+
     if (checked) {
         toggleBodyClasses.push(styles.toggle__body_active);
     }
 
     function handleToggle() {
-        action();
         setChecked(!checked);
+        action();
+        const optionsState = JSON.parse(localStorage.getItem('optionsState'))
+        localStorage.removeItem('optionsState')
+        optionsState[id] = !checked
+        localStorage.setItem('optionsState', JSON.stringify(optionsState));
     }
 
     return (

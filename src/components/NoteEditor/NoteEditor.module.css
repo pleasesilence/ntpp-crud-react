@@ -30,6 +30,7 @@
     color: var(--dark-color);
     outline: none;
     border: none;
+    background: var(--light-color);
 }
 
 .editor__options {
@@ -98,6 +99,7 @@
 .editor__optionDate {
     background-color: transparent;
     cursor: auto;
+    color: var(--dark-color);
 }
 
 
@@ -105,12 +107,14 @@
     display: flex;
     flex-direction: column;
     gap: 40px;
+    background: var(--light-color);
 }
 
 .description__subtitle {
     font-size: 24px;
     font-weight: 600;
     line-height: 29px;
+    color: var(--dark-color);
 }
 
 .description__content {
@@ -124,9 +128,11 @@
     overflow: hidden;
     resize: none;
     display: block;
+    background: var(--light-color);
+    color: var(--dark-color);
 }
 
-.editor__save {
+.editor__save{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -142,5 +148,26 @@
     svg {
         width: 24px;
         height: 24px;
+        color: var(--dark-color);
+    }
+}
+
+.editor__delete{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: none;
+    background-color: transparent;
+    font-size: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    position: absolute;
+    bottom: 54px;
+    right: 68px;
+    svg {
+        width: 24px;
+        height: 24px;
+        color: var(--dark-color);
     }
 }

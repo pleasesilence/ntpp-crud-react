@@ -60,3 +60,19 @@ export function createNote(color) {
     addItemToLocalStorage('notes', newNote);
     return newNote;
 }
+
+export function deleteNote(noteData) {
+    const prevStorage = JSON.parse(localStorage.getItem("notes"));
+    let prevNoteIndex;
+    prevStorage.forEach((item, index) => {
+        if (item.id === noteData.id) {
+            prevNoteIndex = index
+        }
+    })
+    if (prevNoteIndex > -1) {
+        prevStorage.splice(prevNoteIndex, 1)
+    }
+    localStorage.removeItem("notes");
+    localStorage.setItem("notes", JSON.stringify(prevStorage));
+    return prevStorage;
+}

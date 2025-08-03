@@ -11,4 +11,6 @@
     line-height: 29px;
     border: none;
     outline: none;
+    background: none;
+    color: var(--dark-color);
 }

@@ -3,7 +3,6 @@ import styles from './Option.module.css'
 import Toggle from "../UI/Toggle/Toggle";
 
 const Option = ({name, description, action, id, isChecked}) => {
-
     return (
         <div className={styles.option__wrapper}>
             <div className={styles.option__static}>
