@@ -8,6 +8,7 @@ import {ReactComponent as ColorSvg} from "../../assets/icons/editor/color.svg";
 import {ReactComponent as SaveSvg} from "../../assets/icons/editor/save.svg";
 
 import {updateNote} from "../../helpers/noteDataControl";
+import {useTranslate} from "../../hooks/useTranslate";
 
 function NoteEditor({noteData, updateState, currentNotes}) {
     const options = noteData.options
@@ -72,12 +73,14 @@ function NoteEditor({noteData, updateState, currentNotes}) {
         updateState([...copyCurrentNotes, updatedNote])
     }
 
+    const {translate} = useTranslate();
+
 
     return (
         <section className={styles.editor}>
             <div className={styles.editor__wrapper}>
                 <div className={styles.editor__header}>
-                    <div className={styles.editor__subtitle}>Editing note</div>
+                    <div className={styles.editor__subtitle}>{translate('modal.subtitle')}</div>
                     <input
                         name='Note name'
                         className={styles.editor__name}
@@ -89,19 +92,19 @@ function NoteEditor({noteData, updateState, currentNotes}) {
                         <div className={styles.editor__optionsNames}>
                             <div className={styles.editor__optionName}>
                                 <StarSvg></StarSvg>
-                                <div>Status</div>
+                                <div>{translate('modal.options.status')}</div>
                             </div>
                             <div className={styles.editor__optionName}>
                                 <SizeSvg></SizeSvg>
-                                <div>Size</div>
+                                <div>{translate('modal.options.size')}</div>
                             </div>
                             <div className={styles.editor__optionName}>
                                 <ColorSvg></ColorSvg>
-                                <div>Color</div>
+                                <div>{translate('modal.options.color')}</div>
                             </div>
                             <div className={styles.editor__optionName}>
                                 <DateSvg></DateSvg>
-                                <div>Due date</div>
+                                <div>{translate('modal.options.date')}</div>
                             </div>
                         </div>
                         <div className={styles.editor__optionsValues}>
@@ -109,13 +112,13 @@ function NoteEditor({noteData, updateState, currentNotes}) {
                                 onClick={toggleFavoriteState}
                                 className={favoriteClasses.join(' ')}
                             >
-                                {favoriteState ? "Favorite" : "Default"}
+                                {favoriteState ? translate('modal.values.favorite') : translate('modal.values.default')}
                             </button>
                             <button
                                 onClick={toggleSizeState}
                                 className={sizeClass}
                             >
-                                {sizeState === 'Medium' ? "Medium" : "Large"}
+                                {sizeState === 'Medium' ? translate('modal.values.medium') : translate('modal.values.large')}
                             </button>
                             <button
                                 className={styles.editor__optionColor}
@@ -130,7 +133,7 @@ function NoteEditor({noteData, updateState, currentNotes}) {
                     </div>
                     <hr/>
                     <div className={styles.editor__description}>
-                        <div className={styles.description__subtitle}>Description</div>
+                        <div className={styles.description__subtitle}>{translate('modal.description')}</div>
                         <div>
                             <textarea
                                 ref={textarea}

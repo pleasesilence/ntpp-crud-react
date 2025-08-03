@@ -1,22 +1,21 @@
-import React, {createContext, useContext, useEffect} from "react";
+import React, {createContext, useContext, useEffect, useState} from "react";
 import AppRouter from "./components/AppRouter/AppRouter";
-import {setDefaultSettings} from "./helpers/settingsDataControl";
+import {checkOrSetDefaultSettings, setDefaultSettings} from "./helpers/settingsDataControl";
 
-// export const ThemeContext = createContext(
-//     JSON.parse(localStorage.getItem("settings")).theme
-// );
+export const LangContext = createContext(null)
 
 function App() {
 
-    useEffect(() => {
-        setDefaultSettings()
-    }, []);
+    checkOrSetDefaultSettings();
+
+    const currentSettings = JSON.parse(localStorage.getItem('settings'));
+    const [currentAppLanguage, setCurrentAppLanguage] = useState(currentSettings.language);
 
     return (
         <div className="App">
-            {/*<ThemeContext.Provider>*/}
+            <LangContext.Provider value={{setCurrentAppLanguage, currentAppLanguage}}>
                 <AppRouter></AppRouter>
-            {/*</ThemeContext.Provider>*/}
+            </LangContext.Provider>
         </div>
     )
 }

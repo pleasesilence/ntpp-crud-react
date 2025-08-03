@@ -1,25 +1,58 @@
-import React from 'react';
+import React, {useContext, useState} from 'react';
 import styles from './AppearanceOptions.module.css'
 import Option from '../Option/Option'
+import {useTranslate} from "../../hooks/useTranslate";
+import {LangContext} from "../../App";
+import {updateSettingsOption} from "../../helpers/settingsDataControl";
 
 const AppearanceOptions = () => {
+
+    const {currentAppLanguage, setCurrentAppLanguage} = useContext(LangContext)
+    const {translate} = useTranslate();
+
+    function toggleAppLanguage() {
+        setCurrentAppLanguage(currentAppLanguage === 'en' ? 'ru' : 'en')
+    }
+
+    updateSettingsOption('language', currentAppLanguage)
+
+    function checkIsOptionOn(id) {
+        try {
+            const optionsState = JSON.parse(localStorage.getItem('optionsState'));
+            if (!optionsState) {
+                throw new Error('No options state found');
+            }
+            const isChecked = optionsState[id]
+            return isChecked;
+        } catch (e) {
+            // const idArr =
+            let defaultOptionsState = null
+            localStorage.setItem('optionsState', JSON.stringify(defaultOptionsState));
+            console.log(e)
+            return false
+        }
+    }
+
     return (
         <div className={styles.appearance__wrapper}>
             <Option
-                name='Toggle Theme'
-                description='Switching the color scheme from light to dark'
+                id = 'theme'
+                name={translate('settings.appearance.toggleTheme')}
+                description={translate('settings.appearance.toggleThemeDesc')}
             ></Option>
+            <hr/>
             <Option
-                name='Сhange the sidebar position'
-                description='Changes the position of the sidebar from vertical to horizontal'
+                id = 'sidebarPos'
+                name={translate('settings.appearance.sidebarPos')}
+                description={translate('settings.appearance.sidebarPosDesc')}
             ></Option>
+            <hr/>
             <Option
-                name='Change the language'
-                description='Switching the color scheme from light to dark'
-            ></Option>
-            <Option
-                name='Make all notes the same size'
-                description='All large notes will become standard size'
+                id = 'toggleLang'
+                isChecked={checkIsOptionOn}
+                action={toggleAppLanguage}
+                name={translate('settings.appearance.toggleLang')}
+                description={translate('settings.appearance.toggleLangDesc')}
             ></Option>
         </div>
     );

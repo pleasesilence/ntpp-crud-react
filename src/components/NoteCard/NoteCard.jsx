@@ -4,6 +4,7 @@ import {SelectContext} from "../NoteContainer/NoteContainer";
 import {ReactComponent as StarSvg} from "../../assets/icons/star.svg";
 import {ReactComponent as PenSvg} from "../../assets/icons/pen.svg";
 import {useNavigate} from 'react-router';
+import {useTranslate} from "../../hooks/useTranslate";
 
 function NoteCard({noteData, selectNote, toggleModal, ...props}) {
     const whatIsSelected = useContext(SelectContext);

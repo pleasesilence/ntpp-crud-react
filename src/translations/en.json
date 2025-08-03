@@ -1,0 +1,42 @@
+{
+    "modal": {
+        "options": {
+            "status": "Status",
+            "size": "Size",
+            "color": "Color",
+            "date": "Due date"
+        },
+        "values": {
+            "default": "Default",
+            "favorite": "Favorite",
+            "medium": "Medium",
+            "large": "Large"
+        },
+        "description": "Description",
+        "subtitle": "Editing note"
+    },
+    "notes": {
+        "notes": "Notes",
+        "search": "Search",
+        "settings": "Settings",
+        "zeroNotes": "There are no notes here."
+    },
+    "settings": {
+        "settings": "Settings",
+        "appearance": {
+            "appearance": "Appearance",
+            "toggleTheme": "Toggle theme",
+            "toggleThemeDesc": "Switching the color scheme from light to dark",
+            "sidebarPos": "Change the sidebar position",
+            "sidebarPosDesc": "Changes the position of the sidebar from vertical to horizontal",
+            "toggleLang": "Change the language",
+            "toggleLangDesc": "Translates the application content from english to russian"
+        },
+        "statistics": {
+            "statistics": "Statistics",
+            "fullNumber": "Full number of notes",
+            "favoriteNotes": "Number of favorite notes",
+            "largeNotes": "Number of large notes"
+        }
+    }
+}

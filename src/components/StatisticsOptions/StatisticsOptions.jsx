@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './StatisticsOptions.module.css';
+import {useTranslate} from "../../hooks/useTranslate";
 
 const StatisticsOptions = () => {
 
@@ -21,18 +22,21 @@ const StatisticsOptions = () => {
         numberOfLarge: countNumberOf('size', 'Large')
     }
 
+    const {translate} = useTranslate();
     return (
         <div className={styles.stats__wrapper}>
             <div className={styles.stats__label}>
-                <p className={styles.stats__name}>Full number of notes</p>
+                <p className={styles.stats__name}>{translate('settings.statistics.fullNumber')}</p>
                 <p className={styles.stats__value}>{statData.numberOfNotes}</p>
             </div>
+            <hr/>
             <div className={styles.stats__label}>
-                <p className={styles.stats__name}>Number of favorite notes</p>
+                <p className={styles.stats__name}>{translate('settings.statistics.favoriteNotes')}</p>
                 <p className={styles.stats__value}>{statData.numberOfFavorites}</p>
             </div>
+            <hr/>
             <div className={styles.stats__label}>
-                <p className={styles.stats__name}>Number of large notes</p>
+                <p className={styles.stats__name}>{translate('settings.statistics.largeNotes')}</p>
                 <p className={styles.stats__value}>{statData.numberOfLarge}</p>
             </div>
         </div>

@@ -1,17 +1,20 @@
-import React, {useContext} from 'react';
+import React, {useState} from 'react';
 import styles from './SideBarLayout.module.css';
 import {Link, Outlet } from 'react-router';
-import NotesPage, {NoteContext} from "../../pages/NotesPage/NotesPage";
 import Icon from "../UI/Icon/Icon";
+
+import {useTranslate} from '../../hooks/useTranslate'
 
 const SideBarLayout = ({isCreateActive, createNoteAndUpdateState}) => {
 
-    const [isActive, setActive] = React.useState(false);
+    const [isActive, setActive] = useState(false);
     const colorsForNoteCreation = ['#FF9B72', '#FEC971', '#E3EF8F', '#0099B7', '#876DBC']
 
     function showColors() {
         setActive(!isActive);
     }
+
+    const {translate} = useTranslate();
 
     return (
         <>
@@ -33,7 +36,7 @@ const SideBarLayout = ({isCreateActive, createNoteAndUpdateState}) => {
                         ): <></>}
                     </div>
                 </nav>
-                <Link to='/settings/appearance' className={styles.sideBar__settings}>Settings</Link>
+                <Link to='/settings/appearance' className={styles.sideBar__settings}>{translate('notes.settings')}</Link>
             </header>
             <Outlet/>
         </>

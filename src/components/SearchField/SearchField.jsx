@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import styles from './SearchField.module.css'
+import {useTranslate} from "../../hooks/useTranslate";
 
 const SearchField = ({handleSearchChange}) => {
     const [searchField, setSearchField] = useState('')
@@ -9,9 +10,11 @@ const SearchField = ({handleSearchChange}) => {
         handleSearchChange(event.target.value)
     }
 
+    const {translate} = useTranslate()
+
     return (
         <div className={styles.searchField}>
-            <input onChange={handleChange} value={searchField} placeholder='Search' type="text" className={styles.searchField__input}/>
+            <input onChange={handleChange} value={searchField} placeholder={translate('notes.search')} type="text" className={styles.searchField__input}/>
         </div>
     );
 };

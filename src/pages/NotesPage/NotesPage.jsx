@@ -1,4 +1,4 @@
-import React, {createRef, useMemo, useState} from 'react';
+import React, {useMemo, useState} from 'react';
 import styles from './NotesPage.module.css'
 import NoteContainer from "../../components/NoteContainer/NoteContainer";
 import SearchField from "../../components/SearchField/SearchField";
