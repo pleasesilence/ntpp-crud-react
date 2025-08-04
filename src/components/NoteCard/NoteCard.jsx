@@ -39,8 +39,8 @@ function NoteCard({noteData, selectNote, toggleModal, ...props}) {
             onClick={handleCardClick}
         >
             <div className={styles.noteCard__content}>
-                <p className={styles.noteCard__text}>{noteData.name}</p>
-                <p className={styles.noteCard__text}>{noteData.options.date.value}</p>
+                <p className={styles.noteCard__title}>{noteData.name}</p>
+                <p className={styles.noteCard__date}>{noteData.options.date.value}</p>
             </div>
             <div className={styles.noteCard__btns}>
                 <div

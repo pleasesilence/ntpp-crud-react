@@ -19,10 +19,18 @@
     justify-content: space-between;
 }
 
-.noteCard__text {
-    font-size: 18px;
+.noteCard__date {
+    font-size: 20px;
     font-weight: 500;
-    line-height: 22px;
+    line-height: 36px;
+}
+
+.noteCard__title {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 36px;
+    overflow: hidden;
+    max-height: 140px;
 }
 
 .noteCard__btns {

@@ -18,12 +18,19 @@ const NotesPage = () => {
     const [currentData, setCurrentData] = useState(null);
     const [searchQuery, setSearchQuery] = useState('');
 
+    const favoriteNotes = [...notes].filter((note) => note.options.favorite.value === true)
+    const otherNotes = [...notes].filter((note) => note.options.favorite.value === false)
+
     const sortedNotes = useMemo(() => {
-        return [...notes].sort((a, b) => a.id - b.id);
+        return (
+            [
+                ...[...favoriteNotes].sort((a, b) => a.id - b.id),
+                ...[...otherNotes].sort((a, b) => a.id - b.id)
+            ]);
     }, [notes])
 
     const sortedAndSearchedNotes = useMemo(() => {
-        return sortedNotes.filter(note => note.name.includes(searchQuery))
+        return sortedNotes.filter(note => note.name.toLowerCase().includes(searchQuery.toLowerCase()) || note.description.toLowerCase().includes(searchQuery.toLowerCase()))
     }, [sortedNotes, searchQuery]);
 
     function handleSearchChange(newState) {
